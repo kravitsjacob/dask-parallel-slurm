@@ -129,5 +129,6 @@ dmypy.json
 .pyre/
 
 # Generated files
-result.out
-result.err
+*.out
+*.err
+dask-worker-space
