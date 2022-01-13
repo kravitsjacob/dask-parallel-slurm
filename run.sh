@@ -8,12 +8,11 @@
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=1
 #SBATCH --partition=amilan-ucb
-#SBATCH --account=ucb-summit-jrk
 
 module purge
 
 # Load conda commands
-source /curc/sw/anaconda3/2019.07/bin/activate
+source /curc/sw/anaconda3/latest
 
 # Create conda environment
 conda env create -f environment.yml
