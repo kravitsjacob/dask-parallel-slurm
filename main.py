@@ -96,7 +96,7 @@ def simulation(inputs, constant):
             'Max': inputs.max(),
             'Min': inputs.min(),
             'Mean': inputs.mean(),
-            'constant': constant
+            'Constant': constant
         }
     )
     return results
@@ -118,7 +118,6 @@ def main():
         lambda row: simulation(inputs=row, constant=1008),
         axis=1
     )
-
     print('Results of serial test')
     print(res_test)
 
@@ -134,9 +133,9 @@ def main():
     client = Client(cluster)
     ddf = dd.from_pandas(df, npartitions=clargs.npartitions)
     run = ddf.apply(
-        simulation,
+        lambda row: simulation(inputs=row, constant=1008),
         axis=1,
-        meta=pd.DataFrame(columns=['Max', 'Min', 'Mean'], dtype='float64')
+        meta=pd.DataFrame(columns=['Max', 'Min', 'Mean', 'Constant'], dtype='float64')
     ).persist()
     progress(run)
     res = run.compute(scheduler=client)
