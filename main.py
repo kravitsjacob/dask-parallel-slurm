@@ -109,7 +109,7 @@ def main():
     # Generate random inputs
     df = pd.DataFrame(
         columns=['Input 1', 'Input 2', 'Input 3', 'Input 4', 'Input 5'],
-        data=np.random.normal(0, 1, (1000, 5))
+        data=np.random.normal(0, 1, (10000, 5))
     )
     print('success: Generating random inputs')
 
