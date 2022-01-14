@@ -36,21 +36,40 @@ def job(inputs, constant):
     return results
 
 
-if __name__ == '__main__':
-    # cluster = SLURMCluster(cores=2, memory='1 GB', processes=NUMPROCESSES, walltime='00:10:00', queue='amilan-ucb')
-    # cluster.scale(NUMNODES*NUMPROCESSES)
-    # client = Client(cluster)
-    print("start script...")
-    x = np.random.normal(0, 1, (100, 5))
+def main():
+    # Generate random inputs
     df = pd.DataFrame(
         columns=['Input 1', 'Input 2', 'Input 3', 'Input 4', 'Input 5'],
-        data=x
+        data=np.random.normal(0, 1, (100, 5))
     )
-    a = df.apply(
+    print('success: Generating random inputs')
+
+    # Run serially on first 5 to test
+    res_test = df.iloc[0:5].apply(
         lambda row: job(inputs=row, constant=1008),
         axis=1
     )
-    print(a)
+    print('Results of serial test')
+    print(res_test)
+    
+
+
+if __name__ == '__main__':
+    main()
+    # cluster = SLURMCluster(cores=2, memory='1 GB', processes=NUMPROCESSES, walltime='00:10:00', queue='amilan-ucb')
+    # cluster.scale(NUMNODES*NUMPROCESSES)
+    # client = Client(cluster)
+    # print("start script...")
+    # x = np.random.normal(0, 1, (100, 5))
+    # df = pd.DataFrame(
+    #     columns=['Input 1', 'Input 2', 'Input 3', 'Input 4', 'Input 5'],
+    #     data=np.random.normal(0, 1, (100, 5))
+    # )
+    # a = df.apply(
+    #     lambda row: job(inputs=row, constant=1008),
+    #     axis=1
+    # )
+    # print(a)
 
 
     # ddf = dd.from_pandas(df, npartitions=10)
