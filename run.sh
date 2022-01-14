@@ -3,10 +3,8 @@
 #SBATCH --job-name=dask-parallel
 #SBATCH --output=result.out
 #SBATCH --error=result.err
-#SBATCH --time=0-00:05
+#SBATCH --time=00:05:00
 #SBATCH --nodes=1
-#SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=1
 #SBATCH --partition=amilan-ucb
 
 module purge
