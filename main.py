@@ -28,7 +28,7 @@ def input_parse():
     )
     argparse_inputs.add_argument(
         '--worker_queue',
-        type=int,
+        type=str,
         action='store',
         help='Destination queue for each worker job.',
         required=False
@@ -49,7 +49,7 @@ def input_parse():
     )
     argparse_inputs.add_argument(
         '--worker_memory',
-        type=int,
+        type=str,
         action='store',
         help='Total amount of memory per job.',
         required=False
@@ -63,7 +63,7 @@ def input_parse():
     )
     argparse_inputs.add_argument(
         '--worker_walltime',
-        type=int,
+        type=str,
         action='store',
         help='Walltime for each worker job.',
         required=False
@@ -118,14 +118,21 @@ def main():
         lambda row: simulation(inputs=row, constant=1008),
         axis=1
     )
+    
     print('Results of serial test')
     print(res_test)
 
     # Run parallel simulations
-    cluster = SLURMCluster(cores=2, memory='1 GB', processes=NUMPROCESSES, walltime='00:10:00', queue='amilan-ucb')
-    cluster.scale(n=1)
+    cluster = SLURMCluster(
+        cores=clargs.worker_cores,
+        memory=clargs.worker_memory,
+        processes=clargs.worker_processes,
+        walltime=clargs.worker_walltime,
+        queue=clargs.worker_queue
+    )
+    cluster.scale(n=clargs.n_workers)
     client = Client(cluster)
-    ddf = dd.from_pandas(df, npartitions=10)
+    ddf = dd.from_pandas(df, npartitions=clargs.npartitions)
     run = ddf.apply(
         simulation,
         axis=1,
