@@ -17,21 +17,21 @@ def input_parse():
         type=int,
         action='store',
         help='The number of partitions of the index to create.',
-        required=True
+        required=False
     )
     argparse_inputs.add_argument(
         '--n_workers',
         type=int,
         action='store',
         help='Target number of workers.',
-        required=True
+        required=False
     )
     argparse_inputs.add_argument(
         '--worker_queue',
         type=int,
         action='store',
         help='Destination queue for each worker job.',
-        required=True
+        required=False
     )
     argparse_inputs.add_argument(
         '--worker_project',
@@ -45,7 +45,7 @@ def input_parse():
         type=int,
         action='store',
         help='Total number of cores per job.',
-        required=True
+        required=False
     )
     argparse_inputs.add_argument(
         '--worker_memory',
