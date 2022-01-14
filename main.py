@@ -17,14 +17,35 @@ def input_parse():
         type=int,
         action='store',
         help='The number of partitions of the index to create.',
-        required=False
+        required=True
     )
     argparse_inputs.add_argument(
         '--n_workers',
         type=int,
         action='store',
         help='Target number of workers.',
-        required=False
+        required=True
+    )
+    argparse_inputs.add_argument(
+        '--worker_cores',
+        type=int,
+        action='store',
+        help='Total number of cores per job.',
+        required=True
+    )
+    argparse_inputs.add_argument(
+        '--worker_memory',
+        type=str,
+        action='store',
+        help='Total amount of memory per job.',
+        required=True
+    )
+    argparse_inputs.add_argument(
+        '--worker_processes',
+        type=int,
+        action='store',
+        help='Cut the job up into this many processes.',
+        required=True
     )
     argparse_inputs.add_argument(
         '--worker_queue',
@@ -41,33 +62,13 @@ def input_parse():
         required=False
     )
     argparse_inputs.add_argument(
-        '--worker_cores',
-        type=int,
-        action='store',
-        help='Total number of cores per job.',
-        required=False
-    )
-    argparse_inputs.add_argument(
-        '--worker_memory',
-        type=str,
-        action='store',
-        help='Total amount of memory per job.',
-        required=False
-    )
-    argparse_inputs.add_argument(
-        '--worker_processes',
-        type=int,
-        action='store',
-        help='Cut the job up into this many processes.',
-        required=False
-    )
-    argparse_inputs.add_argument(
         '--worker_walltime',
         type=str,
         action='store',
         help='Walltime for each worker job.',
         required=False
     )
+    
     # Parse arguments
     argparse_inputs = argparse_inputs.parse_args()
 
