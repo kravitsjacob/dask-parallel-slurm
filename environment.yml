@@ -1,0 +1,9 @@
+name: dask-parallel
+channels:
+  - defaults
+dependencies:
+  - python=3.9
+  - dask
+  - dask-jobqueue
+  - pandas
+prefix: /projects/jakr3868/software/anaconda/envs/dask-parallel
