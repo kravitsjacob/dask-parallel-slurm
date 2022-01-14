@@ -8,6 +8,13 @@ import pandas as pd
 
 
 def input_parse():
+    """Parse command line inputs
+
+    Returns
+    -------
+    argparse_inputs: argparse.ArgumentParser
+        Parse command line arguments
+    """
     # Create argument parser
     argparse_inputs = argparse.ArgumentParser()
 
