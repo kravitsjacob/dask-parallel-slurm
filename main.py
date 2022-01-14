@@ -109,7 +109,7 @@ def main():
     # Generate random inputs
     df = pd.DataFrame(
         columns=['Input 1', 'Input 2', 'Input 3', 'Input 4', 'Input 5'],
-        data=np.random.normal(0, 1, (100, 5))
+        data=np.random.normal(0, 1, (1000, 5))
     )
     print('success: Generating random inputs')
 
@@ -118,7 +118,7 @@ def main():
         lambda row: simulation(inputs=row, constant=1008),
         axis=1
     )
-    
+
     print('Results of serial test')
     print(res_test)
 
