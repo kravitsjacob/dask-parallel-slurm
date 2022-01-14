@@ -1,11 +1,77 @@
+import argparse
 from dask_jobqueue import SLURMCluster
 from dask.distributed import Client, progress
+import dask
 import dask.dataframe as dd
 import numpy as np
 import pandas as pd
 
-NUMNODES = 4
-NUMPROCESSES = 1
+
+def input_parse():
+    # Create argument parser
+    argparse_inputs = argparse.ArgumentParser()
+
+    # Command line arguments
+    argparse_inputs.add_argument(
+        '--npartitions',
+        type=int,
+        action='store',
+        help='The number of partitions of the index to create.',
+        required=True
+    )
+    argparse_inputs.add_argument(
+        '--n_workers',
+        type=int,
+        action='store',
+        help='Target number of workers.',
+        required=True
+    )
+    argparse_inputs.add_argument(
+        '--worker_queue',
+        type=int,
+        action='store',
+        help='Destination queue for each worker job.',
+        required=True
+    )
+    argparse_inputs.add_argument(
+        '--worker_project',
+        type=int,
+        action='store',
+        help='Accounting string associated with each worker job.',
+        required=False
+    )
+    argparse_inputs.add_argument(
+        '--worker_cores',
+        type=int,
+        action='store',
+        help='Total number of cores per job.',
+        required=True
+    )
+    argparse_inputs.add_argument(
+        '--worker_memory',
+        type=int,
+        action='store',
+        help='Total amount of memory per job.',
+        required=False
+    )
+    argparse_inputs.add_argument(
+        '--worker_processes',
+        type=int,
+        action='store',
+        help='Cut the job up into this many processes.',
+        required=False
+    )
+    argparse_inputs.add_argument(
+        '--worker_walltime',
+        type=int,
+        action='store',
+        help='Walltime for each worker job.',
+        required=False
+    )
+    # Parse arguments
+    argparse_inputs = argparse_inputs.parse_args()
+
+    return argparse_inputs
 
 
 def simulation(inputs, constant):
@@ -37,6 +103,9 @@ def simulation(inputs, constant):
 
 
 def main():
+    # Parse arguments
+    clargs = input_parse()
+
     # Generate random inputs
     df = pd.DataFrame(
         columns=['Input 1', 'Input 2', 'Input 3', 'Input 4', 'Input 5'],
