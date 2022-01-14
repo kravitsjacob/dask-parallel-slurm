@@ -5,7 +5,6 @@
 #SBATCH --error=result.err
 #SBATCH --time=00:05:00
 #SBATCH --nodes=1
-#SBATCH --partition=amilan-ucb
 
 module purge
 
