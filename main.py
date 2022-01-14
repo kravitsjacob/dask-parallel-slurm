@@ -1,5 +1,5 @@
 from dask_jobqueue import SLURMCluster
-from dask.distributed import Client, LocalCluster, progress
+from dask.distributed import Client, progress
 import dask.dataframe as dd
 import numpy as np
 import pandas as pd
@@ -52,7 +52,7 @@ def main():
     print('Results of serial test')
     print(res_test)
 
-    # Run parallel simulation
+    # Run parallel simulations
     cluster = SLURMCluster(cores=2, memory='1 GB', processes=NUMPROCESSES, walltime='00:10:00', queue='amilan-ucb')
     cluster.scale(n=1)
     client = Client(cluster)
