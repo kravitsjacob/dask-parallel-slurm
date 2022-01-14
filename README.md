@@ -13,3 +13,14 @@ This repository has been specifically made for usage on [RMACC Summit Supercompu
 3. Change into cloned directory `$cd dask-parallel-slurm`
 4. Submit the job to Slurm using `$sbatch run.sh --partition shas`
     * If you are running on alpine use `$sbatch run.sh --partition amilan-ucb`
+
+# Contents
+```
+dask-parallel-slurm
+    .gitignore
+    environment.yml: Conda environment specifications
+    LICENSE
+    main.py: Python analysis
+    README.md
+    run.sh: Slurm bash script
+ ```
